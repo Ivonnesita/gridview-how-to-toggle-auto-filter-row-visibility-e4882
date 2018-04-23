@@ -1,0 +1,17 @@
+@Html.DevExpress().GridView(settings => {
+    settings.Name = "gv";
+    
+    //built-in callbacks
+    settings.CallbackRouteValues = new { Controller = "Home", Action = "GridViewPartial" };
+    
+    //custom callbacks
+    settings.CustomActionRouteValues = new { Cotroller = "Home", Action = "GridViewCustomActionPartial" };
+    
+    settings.KeyFieldName = "ID";
+    settings.Columns.Add("ID");
+    settings.Columns.Add("Text");
+    
+    settings.Settings.ShowFilterRow = Convert.ToBoolean(ViewData["AutoFilterRowVisible"]);
+    
+    settings.ClientSideEvents.BeginCallback = "OnBeginCallback";
+}).Bind(Model).GetHtml()
